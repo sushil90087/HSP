@@ -16,7 +16,7 @@ type: blob
 
 
 
-
+//echo "testing";
 
 // Uploads files
 if (isset($_POST['save'])) { // if save button on the form is clicked
