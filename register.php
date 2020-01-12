@@ -32,12 +32,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(mysqli_num_rows($result)>0){
 	$EmailIdErr="Email_id exists or empty";;
 	}
+	if (!filter_var($_POST["EmailId"], FILTER_VALIDATE_EMAIL)) {
+		$EmailIdErr = "Invalid email format";
+	  }
 	$mysql_qry ="select * from $RegisterTableName where PhoneNumber like '$_POST[phone]';";
     $result = mysqli_query($conn , $mysql_qry);
 	if(mysqli_num_rows($result)>0){
-	$PhoneErr="Phone Number exists exists or empty";;
+	$PhoneErr="Phone Number exists or empty";;
 	}
-	if($EmailIdErr=="" && $PhoneErr==""){
+	if(strlen($_POST["password"]<8) || $_POST["password"]!=$_POST["password2"]){
+		$PasswordErr="Incorrect password rule, please enter minimum lenth of 8 and password should match";
+	}
+	if ((!preg_match("/^[a-zA-Z ]*$/",$_POST["name"])) || ($_POST["name"]=="")){
+		$NameErr="Please enter valid name, special character are not allowed";
+	}
+	if (!preg_match('/^[0-9]{10}+$/', $_POST["phone"]))
+	{
+		$PhoneErr="Enter valid phone number";
+	}
+	//echo "phone err is ".$PhoneErr;
+	if($EmailIdErr=="" && $PhoneErr=="" && $NameErr=="" && $PasswordErr==""){
 		//echo "Id is registered, please login";
 		//$mysql_qry ="INSERT INTO register (Name) VALUES ('$_POST[name]');";
 		$mysql_qry ="INSERT INTO $RegisterTableName (Name,Email,Password,State,City,PhoneNumber,Gender) 
@@ -53,6 +67,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 }
+ 
+//echo "name err is ".$NameErr;
 
 ?>
 
@@ -63,16 +79,20 @@ Name: <input type="text" name="name">
 Email_id: <input type="text" name="EmailId">
 <span class="error">* <?php echo $EmailIdErr;?></span>
 <br><br>
-Password: <input type="password" name="password">
+Password(Minimum length is 8): <input type="password" name="password">
 <span class="error">* <?php echo $PasswordErr;?></span>
 <br><br>
+Re-enter Password: <input type="password" name="password2">
+<br>
+<br>
 State: <input type="text" name="state">
 <br><br>
 City: <input type="text" name="city">
 <br><br>
 gender: <input type="text" name="gender">
 <br><br>
-Phone: <input type="tel" name="phone">
+Phone: <input type="number" name="phone">
+<span class="error">* <?php echo $PhoneErr;?></span>
 <br><br>
 
 <input type="submit" class="like" value="Register"><?php ?>
