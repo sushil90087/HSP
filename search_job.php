@@ -70,9 +70,16 @@ if(!isset($_SESSION['EmailId']))
 			echo "MaximumPackage : ".$row["MaximumPackage"]."<br>";
 			echo "NumberOfVacancy : ".$row["NumberOfVacancy"]."<br>";
 			echo "<br>";
-			$_SESSION['JobId']=$row["JobId"];
+			$Jd_link=$row["Jd"];
+			//echo $Jd_link;
+			?>
+			<a href=<?php echo $Jd_link ?>  download="JD">Download JD</a>
+			<?php
+			echo "<br>";
+			//$_SESSION['JobId']=$row["JobId"];
 			//echo "Job id =".$JobId;
-			?> <a href="apply_job.php">Apply for this Job</a> </br><?php
+			$apply_job_link="apply_job.php?id=".$row["JobId"];
+			?> <a href=<?php echo $apply_job_link?>>Apply for this Job</a> </br><?php
 			echo "<br>";
 			echo "<br>";
 			echo "<br>";

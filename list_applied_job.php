@@ -62,6 +62,9 @@ if(!isset($_SESSION['EmailId']))
 			echo "NumberOfVacancy : ".$row["NumberOfVacancy"]."<br>";
 			echo "<br>";
 			
+            ?>
+			<a href=<?php echo $row["Jd"]?>  download="JD">JD details</a>
+			<?php
 		}
 	}
 	}}

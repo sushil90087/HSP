@@ -31,26 +31,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$UserId = $row["UserId"];
 		}
 	}
-	
-		
-		$mysql_qry ="INSERT INTO $JobsTableName (JobPosterId,JobIntroduction,JobLocation,MinimumExperience,MaximumExperience,JoiningTimeInMonths,
-		Company,SkillSet,GenderSpecific,PreferredCompany,MinimumPackage,MaximumPackage,NumberOfVacancy) 
-		VALUES ($UserId,'$_POST[JobIntroduction]','$_POST[JobLocation]','$_POST[MinimumExperience]','$_POST[MaximumExperience]','$_POST[JoiningTimeInMonths]',
-		'$_POST[Company]','$_POST[SkillSet]','$_POST[GenderSpecific]','$_POST[PreferredCompany]','$_POST[MinimumPackage]','$_POST[MaximumPackage]','$_POST[NumberOfVacancy]');";
-		
-        if($conn->query($mysql_qry)){
-			//echo "Data inserted in to DB";
+	$date=date_create();
+	$date_time_stamp =date_timestamp_get($date);
+	$target_dir = "Jd/";
+	$target_file = $target_dir . $UserId.$date_time_stamp.$_FILES["Jd"]["name"];
+	$target_file = preg_replace("/[^a-zA-Z0-9\/\.]+/", "", $target_file);	
+	//$target_file = $target_dir . $_FILES["Filetoupload"]["name"];	
+	echo "Your Jd stored name is : ".$target_file;
+	//echo basename($_FILES["Jd"]["name"]);
+	//echo "target file is ".$target_file;
+	//print_r($_FILES["Jd"]);
+	//echo "target temp file is ".$tmp_name;
+	//echo basename($_FILES["Filetoupload"]["temp_name"]);
+	//echo $_FILES[];
+	//echo "tmp_name is ".$_FILES["Filetoupload"]["tmp_name"];
+	if (move_uploaded_file($_FILES["Jd"]["tmp_name"], $target_file)) {
+	echo "The file ". basename( $_FILES["Jd"]["name"]). " has been uploaded.";
+	} 
+	else {
+	echo "Sorry, there was an error uploading your file.";
+	}	
+	//$target_file='Jd123441text';
+	//$target_file=strval($target_dir);
+	//$target_JobIntroduction=$_POST["JobIntroduction"];
+	$mysql_qry ="INSERT INTO $JobsTableName (JobPosterId,JobIntroduction,JobLocation,MinimumExperience,MaximumExperience,JoiningTimeInMonths,
+	Company,SkillSet,GenderSpecific,PreferredCompany,MinimumPackage,MaximumPackage,NumberOfVacancy,Jd) 
+	VALUES ($UserId,'$_POST[JobIntroduction]','$_POST[JobLocation]','$_POST[MinimumExperience]','$_POST[MaximumExperience]','$_POST[JoiningTimeInMonths]',
+	'$_POST[Company]','$_POST[SkillSet]','$_POST[GenderSpecific]','$_POST[PreferredCompany]','$_POST[MinimumPackage]','$_POST[MaximumPackage]','$_POST[NumberOfVacancy]',
+	?);";
+	$stmt = $conn->prepare($mysql_qry);
+	$stmt->bind_param("s", $target_file);
+        //if($conn->query($mysql_qry)){
+		if($stmt->execute()){
+			echo "Data inserted in to DB";
 			header ('Location: welcome.php');
 		}
 		else{
-			//echo"DB insertion issue";
+			echo"DB insertion issue";
 		}
 	
 }
 
 ?>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+<form method="post" enctype="multipart/form-data"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 JobIntroduction: <input type="text" name="JobIntroduction">
 <br><br>
 
@@ -87,6 +111,9 @@ MaximumPackage: <input type="floatval" name="MaximumPackage">
 NumberOfVacancy: <input type="number" name="NumberOfVacancy">
 <br><br>
 
+
+Upload Jd: <input type="file" name="Jd" >
+<br><br>
 
 <input type="submit" class="like" value="Submit Job"><?php ?>
 </form>

@@ -10,6 +10,10 @@ $JobAppliedTableName = "jobapplied";
 session_start();
 if(!isset($_SESSION['EmailId']))
 	header ('Location: login.php');
+	if (isset($_GET["id"])){
+		$JobId=$_GET["id"];
+	//	echo "Job id is :".$JobId;
+	}
 
 
 	$mysql_qry ="select * from $RegisterTableName where Email like '$_SESSION[EmailId]';";
@@ -21,7 +25,7 @@ if(!isset($_SESSION['EmailId']))
 	}
 //echo $_SESSION['JobId'];
 	//echo "check point 1";
-	$mysql_qry ="select * from $JobsTableName where JobId like '$_SESSION[JobId]';";
+	$mysql_qry ="select * from $JobsTableName where JobId like $JobId;";
     $result = mysqli_query($conn , $mysql_qry);
 	if(mysqli_num_rows($result)>0){
 		while ($row = $result->fetch_assoc()){
