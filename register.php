@@ -40,7 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(mysqli_num_rows($result)>0){
 	$PhoneErr="Phone Number exists or empty";;
 	}
-	if(strlen($_POST["password"]<8) || $_POST["password"]!=$_POST["password2"]){
+	//echo "password length is".strlen($_POST["password"]);
+	//echo "password is ".$_POST["password"]."password 2 is ".($_POST["password"]);
+	if(strlen($_POST["password"])<8 || ($_POST["password"]!=$_POST["password2"])){
 		$PasswordErr="Incorrect password rule, please enter minimum lenth of 8 and password should match";
 	}
 	if ((!preg_match("/^[a-zA-Z ]*$/",$_POST["name"])) || ($_POST["name"]=="")){

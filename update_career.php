@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$date=date_create();
 	$date_time_stamp =date_timestamp_get($date);
 	$target_dir = "ResumeCv/";
-	if(isset($_FILES[ResumeCv]))
+	if(isset($_FILES["ResumeCv"]))
 	$FirstUpdate=0;
 	$target_Resume = $target_dir . $UserId.$date_time_stamp.$_FILES["ResumeCv"]["name"];
 	$target_Resume = preg_replace("/[^a-zA-Z0-9\/\.]+/", "", $target_Resume);
@@ -81,13 +81,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 	else {
+
+		
 		$mysql_qry ="INSERT INTO $CareerTableName (UserId,Introduction,MinimumPackage,PreferredLocation,PreferredCompany,JoiningTimeInMonth,
 		SkillSet,NumberOfYearsExperience,LinkedInId,ResumeCv)
-		VALUES ($UserId, '$_POST[Introduction]', '$_POST[MinimumPackage]', '$_POST[PreferredLocation]', '$_POST[PreferredCompany]',
+		VALUES ($UserId,'$_POST[Introduction]', '$_POST[MinimumPackage]', '$_POST[PreferredLocation]', '$_POST[PreferredCompany]',
 		'$_POST[JoiningTimeInMonth]', '$_POST[SkillSet]', '$_POST[NumberOfYearsExperience]', '$_POST[LinkedInId]',?);";
 		//if($conn->query($mysql_qry)){
+			
 			$stmt = $conn->prepare($mysql_qry);
 			$stmt->bind_param("s", $target_Resume);
+			//echo $stmt;
 			if($stmt->execute()){
 			echo "line 			Data inserted in to DB";
 			header ('Location: welcome.php');

@@ -23,6 +23,43 @@ $password = "Password";
 $state = "State";
 $city = "City";
 $gender = "Gender";
+$indian_all_states  = array (
+	'AP' => 'Andhra Pradesh',
+	'AR' => 'Arunachal Pradesh',
+	'AS' => 'Assam',
+	'BR' => 'Bihar',
+	'CT' => 'Chhattisgarh',
+	'GA' => 'Goa',
+	'GJ' => 'Gujarat',
+	'HR' => 'Haryana',
+	'HP' => 'Himachal Pradesh',
+	'JK' => 'Jammu & Kashmir',
+	'JH' => 'Jharkhand',
+	'KA' => 'Karnataka',
+	'KL' => 'Kerala',
+	'MP' => 'Madhya Pradesh',
+	'MH' => 'Maharashtra',
+	'MN' => 'Manipur',
+	'ML' => 'Meghalaya',
+	'MZ' => 'Mizoram',
+	'NL' => 'Nagaland',
+	'OR' => 'Odisha',
+	'PB' => 'Punjab',
+	'RJ' => 'Rajasthan',
+	'SK' => 'Sikkim',
+	'TN' => 'Tamil Nadu',
+	'TR' => 'Tripura',
+	'UK' => 'Uttarakhand',
+	'UP' => 'Uttar Pradesh',
+	'WB' => 'West Bengal',
+	'AN' => 'Andaman & Nicobar',
+	'CH' => 'Chandigarh',
+	'DN' => 'Dadra and Nagar Haveli',
+	'DD' => 'Daman & Diu',
+	'DL' => 'Delhi',
+	'LD' => 'Lakshadweep',
+	'PY' => 'Puducherry',
+);
 session_start();
 if(!isset($_SESSION['EmailId']))
 	header ('Location: login.php');
@@ -34,9 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //if(isset($_POST['Register']))	{
 //if($_POST["name"]!=""){
 	//echo "Post is selected after form submission";
-
+	$PasswordErr="";
+	if(strlen($_POST["password"])<8 || ($_POST["password"]!=$_POST["password2"])){
+		$PasswordErr="Incorrect password rule, please enter minimum lenth of 8 and password should match";
+	}
 		//echo "Id is registered, please login";
 		//$mysql_qry ="INSERT INTO register (Name) VALUES ('$_POST[name]');";
+		if ($PasswordErr==""){
 		$mysql_qry ="UPDATE $RegisterTableName SET Name='$_POST[name]', Password='$_POST[password]',State='$_POST[state]',City='$_POST[city]',Gender='$_POST[gender]'
 					WHERE Email='$_SESSION[EmailId]';";
 		//VALUES ('$_POST[name]','$_POST[password]','$_POST[state]','$_POST[city]','$_POST[gender]');";
@@ -49,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		else{
 			//echo"DB insertion issue";
 		}
+	}
 	
 }
 
@@ -75,11 +117,30 @@ Name: <input type="text" name="name" value=<?php echo $name?>>
 Password: <input type="password" name="password" value=<?php echo $password?>>
 <span class="error">* <?php echo $PasswordErr;?></span>
 <br><br>
-State: <input type="text" name="state" value=<?php echo $state?>>
+Password-reenter: <input type="password" name="password2" value=<?php echo $password?>>
+<span class="error">* <?php echo $PasswordErr;?></span>
+<br><br>
+State:
+<select name="state">
+<option value=<?php echo $state?>  style="color:red" ><?php echo $state?></option>
+<?php 
+foreach($indian_all_states as $key => $value){
+?><option value=<?php echo $value?>><?php echo $value?></option><?php
+}
+?>
+</select>
+
 <br><br>
 City: <input type="text" name="city" value=<?php echo $city?>>
 <br><br>
-gender: <input type="text" name="gender" value=<?php echo $gender?>>
+gender:
+<select name="gender">
+  <option value=<?php echo $gender?>  style="color:red" ><?php echo $gender?></option>
+  <option value="Male">Male</option>
+  <option value="Female">Female</option>
+  <option value="other">Other</option>
+  </select>
+
 <br><br>
 
 

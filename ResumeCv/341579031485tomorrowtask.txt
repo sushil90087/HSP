@@ -1,0 +1,36 @@
+login 
+and move to other file if connection persist.
+check if connection dont persist, return to login page
+try with multiple user
+upload image/file
+update field
+API with linkedin
+>> develop app in linkedin linkedin.com/developers/apps/new
+clientid
+clientsecret
+link_redirect_url:self
+
+https://www.youtube.com/watch?v=eJWDyADgkdk&list=PL3Y-E4YSE4waHmKVoZ5CsviKygYUA8B92&index=2
+
+3
+session management
+
+flow diagram 
+watch seesion manager with php and sql
+
+session_start()
+session.use_cookies=1
+session.use_only_cokkies =1
+session_use_trans_sid=0, transparent id, 
+session.name PHPSESSID
+session.save_path = tmp
+session.cache_limiter = nocache
+session_cache_expire = 
+session_cookie_domain = limits to domain
+session.cookie_htmlonly(Reduce XSS attacks) =0 
+session.cookie_lifetime=0
+session.cookie_path
+session.cookie_secure=0
+session.use_strict_mode=0 (session fixation attack)
+session.gc_maxlifetime= 24 min(as short as possible 1 min)
+session.gc_divisior => frequency (1/100 = 1%)
