@@ -17,10 +17,14 @@ $RegisterTableName = "register";
 //echo "stage1";
 $LoginErr="";
 session_start();
-if(isset($_SESSION['EmailId']))
-unset($_SESSION['EmailId']);
+//echo $_SESSION['Email_id'];
+if(isset($_SESSION['EmailId'])){
+header ('Location: welcome.php');
+}
+
+//unset($_SESSION['EmailId']);
 //echo "stage2";
-session_destroy();
+//session_destroy();
 //echo "stage3";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //if(isset($_POST['Register']))	{

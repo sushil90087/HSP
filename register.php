@@ -1,6 +1,8 @@
 <?php
 require "connect.php";
 $RegisterTableName = "register";
+$AcademicTableName = "academics";
+$CareerTableName = "career";
 //$user_name = "user_name_1";
 //$user_pass ="user_pass_1";
 //$mysql_qry ="select * from employee_data where user_name like '$user_name' and password like '$user_pass';";
@@ -61,12 +63,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		//$mysql_qry ="INSERT INTO register (Name,Email,Password,State,City,PhoneNumber,DateOfRegistration,Gender)	
 		//VALUES ('$_POST[name]','$_POST[EmailId]','$_POST[password]','$_POST[state]','$_POST[city]','$_POST[phone]',date(),'$_POST[gender]');";
         if($conn->query($mysql_qry)){
-			//echo "Data inserted in to DB";
-			header ('Location: login.php');
+			echo "Data inserted in to DB";
+			//header ('Location: login.php');
 		}
 		else{
-			//echo"DB insertion issue";
+			echo"DB insertion issue";
 		}
+		$mysql_qry ="select * from $RegisterTableName where Email like '$_POST[EmailId]';";
+    	$result = mysqli_query($conn , $mysql_qry);
+		if(mysqli_num_rows($result)>0){
+		while ($row = $result->fetch_assoc()){
+			$UserId = $row["UserId"];
+			}
+
+		}
+		$mysql_qry ="INSERT INTO $AcademicTableName (UserId)
+		VALUES ($UserId);";
+		if($conn->query($mysql_qry)){
+			echo "line 			Data inserted in to DB";
+			//header ('Location: welcome.php');
+		}
+		else{
+			echo"line line DB insertion issue";
+		}
+		$mysql_qry ="INSERT INTO $CareerTableName (UserId)
+		VALUES ($UserId);";
+		if($conn->query($mysql_qry)){
+			echo "line 			Data inserted in to DB";
+			//header ('Location: welcome.php');
+		}
+		else{
+			echo"line line DB insertion issue";
+		}
+		header ('Location: welcome.php');
 	}
 }
  

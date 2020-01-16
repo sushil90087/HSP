@@ -26,7 +26,7 @@ else
 ?>
 </br>
 <a href="update_details.php">update profile</a> </br>
-<a href="login.php">sign off</a> </br>
+<a href="logoff.php">sign off</a> </br>
 <a href="update_academics.php">update academics</a> </br>
 <a href="update_career.php">update career Details</a> </br>
 <a href="job_post.php">Post a job</a> </br>
