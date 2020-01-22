@@ -1,0 +1,64 @@
+tables
+
+Table 1 : Basic credentials
+user Id (PK)
+Password
+name
+email
+Photo
+DOR
+Gender
+country
+state
+city
+phone
+
+
+Table 2 : Academic details
+user Id (PK/FK)
+current company
+experience
+location
+12 board name, percentage
+10 board name, percentage
+engineering college
+CGPA
+branch
+
+Job seekers details:
+user Id (PK/FK)
+linkedin ID.
+short intoduction.-2000
+Minimum package
+preferred location
+preferred company
+joining time-in months
+skill set
+resume
+
+Job Posting details:
+Job Id (PK)
+job-location
+experience required-yearsmin/max
+joining time
+company
+skill set
+total vacancy
+gender biassed job
+date of job posted
+short intro
+attached JD
+job-status: active or passive
+prefeered company
+package range
+
+job matches:
+match-id (PK)
+job-id (FK)
+user -id(FK)
+status- applied, resume selected/rejected, interview done, selected or cancelled.
+
+
+overview use case: complete flow diagram.
+admin - user functionality.== functionality and subcategory, and link with backend to frontend
+

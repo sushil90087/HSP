@@ -16,9 +16,9 @@ $RegisterTableName = "register";
 
 session_start();
 echo $_SESSION['Email_id'];
-if(isset($_SESSION['EmailId'])){
+if (isset($_SESSION['EmailId'])) {
 	session_destroy();
-header ('Location: login.php');
+	header('Location: login.php');
 }
 
 ?>

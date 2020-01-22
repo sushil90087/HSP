@@ -1,0 +1,80 @@
+/*<style>
+.front_page {
+    text-align: center;
+    color: red;
+    background-color: black;
+  }
+</style>*/
+.body{
+    color: black;
+    background-color:white;  
+}
+.front_page {
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    color: black;
+    background-color:#71cbdb;
+    background-image:project/bg_img_2.jpg
+    /* bring your own prefixes */
+    
+    }
+    .register_link {
+        text-align: center;
+        color: yellow;
+        top: 50%;
+        left: 50%;
+        -moz-animation:  register_link 5s linear infinite alternate;
+     
+        }
+        .register_link_2 {
+            text-align: center;
+            color: yellow;
+            top: 50%;
+            left: 50%;
+            -moz-animation:  register_link 5s linear infinite alternate;
+         
+            }
+        .a:link, a:visited {
+            
+            animation: blinker 1s linear infinite;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            
+            
+          }
+          
+          a:hover, a:active {
+            text-decoration: underline;
+            color: black;
+            }
+          @keyframes blinker {
+            50% {
+              opacity: 0;
+            }
+.form_error{
+    color:red;
+}
+.front_page_register {
+    text-align: left;
+    color: black;
+    background-color:#71cbdb;
+    top: 50%;
+    
+              /* bring your own prefixes */
+    
+    }
+ .left_bar {
+    background-color:#10383f; 
+ }
+
+  .left_bar a:hover, a:active {
+    text-decoration: underline;
+    color: pink;
+    }
+ 
+    .top-link {
+        background-color:#10383f;
+    }
+    
